@@ -9,9 +9,12 @@
 // each day forecast has the date, a weather icon, temp, wind, and humidity
 // the most recent city search needs to display as a clickable link to easily access the most
 //recently searched weather
-var jaxWeather = 'http://api.openweathermap.org/data/2.5/weather?q=Jacksonville,FLuk&units=imperial&APPID=2cd8c8262bad3d97fbc4eedd4e5664c4';
+var weather = 'http://api.openweathermap.org/data/2.5/weather?q=Raleigh&units=imperial&APPID=2cd8c8262bad3d97fbc4eedd4e5664c4';
+var temp = $('#temp');
+var wind = $('#wind');
+var humidity = $('#humidity');
 //single day weather forecast
-fetch (jaxWeather)
+fetch (weather)
 .then(function(response){
     return response.json();
 })
@@ -33,4 +36,13 @@ fetch ('http://api.openweathermap.org/data/2.5/find?q=Raleigh&units=imperial&app
     console.log('data: ', data);
     
 })
+
+var date = $('#date');
+
+function displayDate() {
+    var today = moment().format('L');
+    date.text(today);
+}
+
+displayDate();
 
