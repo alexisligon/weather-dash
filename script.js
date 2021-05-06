@@ -9,57 +9,43 @@
 // each day forecast has the date, a weather icon, temp, wind, and humidity
 // the most recent city search needs to display as a clickable link to easily access the most
 //recently searched weather
-var weather = 'http://api.openweathermap.org/data/2.5/weather?q=Raleigh&units=imperial&APPID=2cd8c8262bad3d97fbc4eedd4e5664c4';
-var city = $('#city-name');
-var temp = $('#temp');
-var wind = $('#wind');
-var humidity = $('#humidity');
-//single day weather forecast
-fetch(weather)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log('data: ', data);
-        console.log('name: ', data.name);
-        console.log('main', data.main);
-        console.log('temp: ', data.main.temp, 'degrees');
-        console.log('wind: ', data.wind.speed, 'mph')
-        console.log('humidity: ', data.main.humidity, '%');
-
-        city.text(`${data.name}`);
-        temp.text(`Temperature: ${data.main.temp}°F`);
-        wind.text(`Wind: ${data.wind.speed}mph`);
-        humidity.text(`Humidity: ${data.main.humidity}%`);
-
-    })
-
-//5 day weather forecast
-
-var fiveDayWeather = 'http://api.openweathermap.org/data/2.5/find?q=Raleigh&units=imperial&appid=12ab451d86c37bd1bbaa8df17ff823aa'
-var tableBody = $('#repo-table');
+var currentWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=35.7721&lon=-78.6386&&units=imperial&exclude=current,minutely,hourly&appid=12ab451d86c37bd1bbaa8df17ff823aa'
+var cityWeather = 'https://api.openweathermap.org/data/2.5/weather?q=Raleigh&units=imperial&appid=12ab451d86c37bd1bbaa8df17ff823aa'
 
 $.ajax({
-    url: fiveDayWeather,
+    url: cityWeather,
     method: 'GET',
-}).then(function (data) {
-    for (var i = 0; i < data.list.length; i++) {
-        console.log('temp: ', data.list[i].main.temp);
-        console.log('wind: ', data.list[i].wind.speed);
-        console.log('humidity: ', data.list[i].main.humidity);
+}).then(function (data) { 
+    console.log(data);
+    var latitude = data.coord.lat;
+    var longitude = data.coord.lon;
+    var temp = data.main.temp;
+    var humidity = data.main.humidity;
+    console.log('latitude: ', latitude);
+    console.log('longitude: ', longitude);
+    console.log('temp: ', temp);
+    console.log('humidity: ', humidity);
 
-        var createTableRow = $('<tr>');
-        var tableData = $('<td>');
+    var fiveDayQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=current,minutely,hourly&appid=12ab451d86c37bd1bbaa8df17ff823aa`
+    $.ajax({
+        url: fiveDayQuery,
+        method: 'GET'
+    }).then(function(data){
+        console.log(data);
+        for (let i = 0; i < data.daily.length; i++) {
+            var index = data.daily[i];
+            console.log('temp: ', index.temp.day);
+            console.log('wind: ', index.wind_speed);
+            console.log('humidity, ', index.humidity);
+            console.log('date: ', day);
 
-        tableData.text(data.list[i].main.temp);
-        console.log(tableData);
-
-        createTableRow.append(tableData);
-        tableBody.append(createTableRow);
-
-
-    }
-})
+            var day = moment.unix(index.dt).format('L');
+            console.log(day);
+            
+        }
+        
+    })
+ })
 
 //display current days date
 var date = $('#date');
