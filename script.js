@@ -15,33 +15,50 @@ var temp = $('#temp');
 var wind = $('#wind');
 var humidity = $('#humidity');
 //single day weather forecast
-fetch (weather)
-.then(function(response){
-    return response.json();
-})
-.then(function(data){
-    console.log('data: ', data);
-    console.log('name: ', data.name);
-    console.log('main', data.main);
-   console.log('temp: ', data.main.temp, 'degrees');
-   console.log('wind: ', data.wind.speed, 'mph')
-   console.log('humidity: ', data.main.humidity, '%');
+fetch(weather)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log('data: ', data);
+        console.log('name: ', data.name);
+        console.log('main', data.main);
+        console.log('temp: ', data.main.temp, 'degrees');
+        console.log('wind: ', data.wind.speed, 'mph')
+        console.log('humidity: ', data.main.humidity, '%');
 
-   city.text(`${data.name}`);
-   temp.text(`Temperature: ${data.main.temp}°F`);
-   wind.text(`Wind: ${data.wind.speed}mph`);
-   humidity.text(`Humidity: ${data.main.humidity}%`);
+        city.text(`${data.name}`);
+        temp.text(`Temperature: ${data.main.temp}°F`);
+        wind.text(`Wind: ${data.wind.speed}mph`);
+        humidity.text(`Humidity: ${data.main.humidity}%`);
 
-})
+    })
 
 //5 day weather forecast
-fetch ('http://api.openweathermap.org/data/2.5/find?q=Raleigh&units=imperial&appid=12ab451d86c37bd1bbaa8df17ff823aa')
-.then(function(response){
-    return response.json();
-})
-.then(function(data){
-    console.log('data: ', data);
-    
+
+var fiveDayWeather = 'http://api.openweathermap.org/data/2.5/find?q=Raleigh&units=imperial&appid=12ab451d86c37bd1bbaa8df17ff823aa'
+var tableBody = $('#repo-table');
+
+$.ajax({
+    url: fiveDayWeather,
+    method: 'GET',
+}).then(function (data) {
+    for (var i = 0; i < data.list.length; i++) {
+        console.log('temp: ', data.list[i].main.temp);
+        console.log('wind: ', data.list[i].wind.speed);
+        console.log('humidity: ', data.list[i].main.humidity);
+
+        var createTableRow = $('<tr>');
+        var tableData = $('<td>');
+
+        tableData.text(data.list[i].main.temp);
+        console.log(tableData);
+
+        createTableRow.append(tableData);
+        tableBody.append(createTableRow);
+
+
+    }
 })
 
 //display current days date
@@ -50,7 +67,10 @@ var date = $('#date');
 function displayDate() {
     var today = moment().format('L');
     date.text(today);
+
+    //add 1 day for 5 day forecast
+    // var tomorrow = moment().add(1, 'days').format('L');
+    // console.log(tomorrow);
 }
 
 displayDate();
-

@@ -24,10 +24,12 @@
         <h5 class="card-title">Search for a City:</h5>
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="San Diego" aria-label="First name">
+            <form id="search-form">
+            <input type="text" class="form-control" placeholder="San Diego" aria-label="First name" id="search-input">
             <div class="d-grid gap-2">
-              <button class="btn btn-primary" type="button">Search</button>
+              <button class="btn btn-primary" type="button" id="search-button">Search</button>
             </div>
+          </form>
           </div>
         </div>
       </div>
@@ -44,6 +46,89 @@
         </ul>
       </div>
     </div>
+
+<!-- start of 5 day forecast -->
+<table class="card-body table mx-auto my-4">
+  <th>
+    <p class="my-4">5 Day Forecast</p>
+  </th>
+  <tbody id="repo-table" class="mx-auto text-center">
+    <th>Day</th>
+    <th>Temp</th>
+    <th>Wind</th>
+    <th>Humidity</th>
+  </tbody>
+</table>
+    <!-- <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body"> 
+            <h6 class="card-subtitle mb-2 text-muted" id="date"></h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="temp"></li>
+              <li class="list-group-item" id="wind"></li>
+              <li class="list-group-item" id="humidity"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            
+            <h6 class="card-subtitle mb-2 text-muted" id="date"></h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="temp"></li>
+              <li class="list-group-item" id="wind"></li>
+              <li class="list-group-item" id="humidity"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            
+            <h6 class="card-subtitle mb-2 text-muted" id="date"></h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="temp"></li>
+              <li class="list-group-item" id="wind"></li>
+              <li class="list-group-item" id="humidity"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            
+            <h6 class="card-subtitle mb-2 text-muted" id="date"></h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="temp"></li>
+              <li class="list-group-item" id="wind"></li>
+              <li class="list-group-item" id="humidity"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            
+            <h6 class="card-subtitle mb-2 text-muted" id="date"></h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="temp"></li>
+              <li class="list-group-item" id="wind"></li>
+              <li class="list-group-item" id="humidity"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
