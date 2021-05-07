@@ -14,6 +14,8 @@ var sevenDays = 'https://api.openweathermap.org/data/2.5/onecall?lat=35.7721&lon
 //current weather
 var cityWeather = 'https://api.openweathermap.org/data/2.5/weather?q=orlando&units=imperial&appid=12ab451d86c37bd1bbaa8df17ff823aa'
 
+var cityArray = [];
+checkLocalStorage();
 function getCitySearch() {
     var city = $('#search-input').val();
     var cityQuery = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=12ab451d86c37bd1bbaa8df17ff823aa`;
@@ -50,10 +52,7 @@ function getCitySearch() {
             url: fiveDayQuery,
             method: 'GET'
         }).then(function (data) {
-            console.log('data!!!!!! ', data)
-            console.log('testing')
-            var whatisthis = data.daily[0].weather[0].icon
-            console.log('what are you ', whatisthis)
+        
             $('#icon-space').attr('src', `https://openweathermap.org/img/wn/${data.daily[0].weather[0].icon}@2x.png`)
             //5 day forecast
             for (let i = 0; i < data.daily.length; i++) {
@@ -63,11 +62,33 @@ function getCitySearch() {
                 $(`#wind${i + 1}`).text(`Wind: ${data.daily[i].wind_speed} mph`);
                 $(`#humidity${i + 1}`).text(`Humidity: ${data.daily[i].humidity}%`);
             }
+            cityArray.push(city);
+          
+            localStorage.setItem('city', JSON.stringify(cityArray));
         })
     })
 }
+//chekc local storage
+//display cities if stored as array
+//if not, start with empty array
+//add city to array
+//stringify to set to local storage
+//parse to retrieve and display from storage 
 
-
+function checkLocalStorage (){
+   var previousCities = JSON.parse(localStorage.getItem('city'))
+    if (previousCities === null){
+        return;
+    } else {
+        cityArray = previousCities;
+       var buttonList = $('#button-section')
+       for(i=0; i<cityArray.length; i++){
+           var cityButton = $('<li>');
+           cityButton.text(cityArray[i]).addClass('btn btn-primary');
+           buttonList.append(cityButton);
+       }
+    }
+}
 
 
 //display current days date
