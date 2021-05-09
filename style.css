@@ -1,0 +1,45 @@
+#main-weather, #search-card {
+    margin: 0 auto; 
+    float: none; 
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+#title-card {
+    background-image: linear-gradient(to bottom right,darkkhaki, cornflowerblue);
+    font-size: 35px;
+    font-weight: 500;
+}
+
+#search-card {
+    background-color:  darkkhaki;
+    margin-top: 10px;
+}
+
+#five-days{
+    padding: 50px 25px;
+    background-color: cadetblue;
+}
+
+
+#five-days li {
+    background-color: cornflowerblue;
+}
+
+#main-weather li {
+    background-color: cornflowerblue;
+}
+
+#main-weather, #five-days {
+    display: none;
+}
+
+#main-weather {
+    background-color: darkkhaki;
+}
+
+#five-days .card {
+    background-color: darkkhaki;
+}
+
+
