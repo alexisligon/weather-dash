@@ -1,11 +1,7 @@
-$('#search-button').on('click', function() {
+$('#search-button').on('click', function () {
     getCitySearch();
-    var clearSearch = $('#search-input');
-    clearSearch.text('');
-}
 
-//empty search input value
-)
+})
 
 //seven day forecast
 var sevenDays = 'https://api.openweathermap.org/data/2.5/onecall?lat=35.7721&lon=-78.6386&&units=imperial&exclude=current,minutely,hourly&appid=12ab451d86c37bd1bbaa8df17ff823aa'
@@ -83,12 +79,9 @@ function getCitySearch(citySearch) {
     })
 }
 
-$(document).on('click', '.pastCitiesButton', function() {
+$(document).on('click', '.pastCitiesButton', function () {
     console.log('button was clicked')
-    var newSearch = $(`#${city}`);
-    getCitySearch(newSearch);
-    
-    
+
     //get city from id on button pass through function
     //clear input after search
 })
